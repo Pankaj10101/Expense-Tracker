@@ -28,13 +28,14 @@ const ExpenseForm = (props) => {
     setEnteredTitle("")
     setEnteredAmount("")
     setEnteredDate("")
+
+    cancelExpense()
    }
 
    const [state, setState] = useState('on')
 
    function cancelExpense(){
     setState('off')
-    console.log(state)
    }
 
    function newExpense(e){
@@ -60,7 +61,7 @@ const ExpenseForm = (props) => {
             </div>
             <div className='new-expense__actions'>
             <button onClick={cancelExpense} >Cancel</button>
-            <button onClick={cancelExpense} type='submit'>Add Expense</button>
+            <button type='submit'>Add Expense</button>
             </div>
         </div>
     </form>

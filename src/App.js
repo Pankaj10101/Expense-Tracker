@@ -36,7 +36,6 @@ const [newData, setNewData] = useState(expenses)
       return [...prev, expense]
     })
   }
-  console.log(newData)
   return (
     <div >
     <NewExpense onAddExpense={addExpenseHandler} />
