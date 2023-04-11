@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './ExpenseForm.css'
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
+
    const [enteredtitle , setEnteredTitle] =  useState("")
    const [enteredAmount , setEnteredAmount] =  useState("")
    const [enteredDate , setEnteredDate] =  useState("")
@@ -23,27 +24,43 @@ const ExpenseForm = () => {
         amount : enteredAmount,
         date : new Date(enteredDate)
     }
-    console.log(data)
+    props.onSaveExpenseData(data)
+    setEnteredTitle("")
+    setEnteredAmount("")
+    setEnteredDate("")
    }
 
+   const [state, setState] = useState('on')
 
+   function cancelExpense(){
+    setState('off')
+    console.log(state)
+   }
+
+   function newExpense(e){
+    setState('on')
+   }
+   if(state == 'off'){
+    return <button onClick={newExpense}>Add New Expense</button>
+   }
   return (
     <form onSubmit={submitForm}>
         <div className='new-expense__controls'>
             <div className='new-expense__control'>
                 <label>Title</label>
-                <input onChange={changetitle} type='text'/>
+                <input onChange={changetitle} value={enteredtitle} type='text'/>
             </div>
             <div className='new-expense__control'>
                 <label>Amount</label>
-                <input onChange={changeamount} type='number' min="0.01" step='0.01'/>
+                <input onChange={changeamount} value={enteredAmount} type='number' min="0.01" step='0.01'/>
             </div>
             <div className='new-expense__control'>
                 <label>Date</label>
-                <input onChange={changedate} type='date' min='2020-01-01' max= '2023-12-31'/>
+                <input onChange={changedate} value={enteredDate} type='date' min='2020-01-01' max= '2023-12-31'/>
             </div>
             <div className='new-expense__actions'>
-            <button type='submit'>Add Expense</button>
+            <button onClick={cancelExpense} >Cancel</button>
+            <button onClick={cancelExpense} type='submit'>Add Expense</button>
             </div>
         </div>
     </form>
